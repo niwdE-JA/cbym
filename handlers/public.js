@@ -22,14 +22,14 @@ module.exports.subscribe = async (req, res)=>{
 }
 
 module.exports.getFeeds = async (req, res)=>{
-    let {start, end} = req.query ;
+    let {start, number} = req.query ;
     let knex = req.knex_object;
 
     try {
         // 
         let result = await  knex.select().from('feeds')
                             .where('index','>=', start )
-                            .andWhere('index','<=', end ) ;
+                            .limit( number ) ;
         console.log(result);
 
         res.status(201).json({status : 201, content : result } );
