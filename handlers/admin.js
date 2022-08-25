@@ -19,7 +19,7 @@ module.exports.loginHandler = async (req, res)=>{
         }
     }else{
         //
-        res.status(401).json({status : 401, content : "Admin login failed" } );
+        res.status(401).json({status : 401, content : "Admin login failed : Invalid key" } );
     }
 }
 
@@ -41,12 +41,13 @@ module.exports.logoutHandler = async (req, res)=>{
 
 module.exports.postHandler = async (req, res)=>{
     //
-    const {title, message, author, date} = req.body ;
+    const {title, content, author } = req.body ;
+    let date = new Date().getTime()
     let knex = req.knex_object;
 
     try {
         // 
-        let result = await knex.insert({title, message, author, date})
+        let result = await knex.insert({title, content, author, date})
                                 .into('feeds');
         console.log(result);
 

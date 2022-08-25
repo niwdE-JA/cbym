@@ -23,12 +23,13 @@ module.exports.subscribe = async (req, res)=>{
 
 module.exports.getFeeds = async (req, res)=>{
     let {start, number} = req.query ;
+    console.log(req.query);
     let knex = req.knex_object;
 
     try {
         // 
         let result = await  knex.select().from('feeds')
-                            .where('index','>=', start )
+                            .where('index','>', start )
                             .limit( number ) ;
         console.log(result);
 

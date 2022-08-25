@@ -7,8 +7,9 @@ lastname VARCHAR(25)
 CREATE TABLE feeds (
 index SERIAL PRIMARY KEY,
 title VARCHAR NOT NULL,
-message TEXT NOT NULL,
 author VARCHAR NOT NULL,
+content TEXT NOT NULL,
+date BIGINT NOT NULL
 -- TIME
 );
 

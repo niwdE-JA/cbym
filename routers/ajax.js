@@ -29,7 +29,7 @@ router.get('/feeds', getFeeds );
 
 router.post('/post', auth, postHandler );
 
-router.delete('/delete/:index', auth, deleteHandler ); 
+router.post('/delete/:index', auth, deleteHandler ); 
 
 
 module.exports = router;
