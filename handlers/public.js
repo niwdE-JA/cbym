@@ -39,7 +39,7 @@ module.exports.getFeeds = async (req, res)=>{
         let result = await  knex.select().from('feeds')
                             .where('index','>', start )
                             .limit( number ) ;
-        console.log(result);
+        console.log(result.length + " feed results");
 
         res.status(201).json({status : 201, content : result } );
         //
