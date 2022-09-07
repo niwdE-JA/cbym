@@ -1,4 +1,5 @@
 const { ADMIN_KEY } = require('../config');
+const sendMail = require('../mail/sendMail');
 
 
 module.exports.loginHandler = async (req, res)=>{
@@ -53,12 +54,34 @@ module.exports.postHandler = async (req, res)=>{
 
         res.status(201).json({status : 201, content : "feed added successfully" } );
         
+        //send newsfeed email
+        sendFeeds(knex);
+        
     } catch (error) {
         console.log('Error fetching data : ' + error);
         res.status(401).json({status : 401, error});
     }
                         
 }
+async function sendFeeds(knex) {
+    try {
+        let result = await knex.select(['email', 'firstname']).from('subscribers');// limit
+        for (const i in result) {
+            if (Object.hasOwnProperty.call(result, i)) {
+                const user = result[i];
+                sendMail(
+                    user.email,
+                    "Your daily CBYM News feed!",//title 
+                    "INSERT NEWSFEED TEXT HERE"// text
+                );
+            }
+        }
+    } catch (error) {
+        console.log('Error sending email : ' + error);
+    }
+    
+}
+
 
 module.exports.deleteHandler = async (req, res)=>{
     //

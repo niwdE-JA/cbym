@@ -1,3 +1,5 @@
+const sendMail = require('../mail/sendMail');
+
 module.exports.subscribe = async (req, res)=>{
     console.log("Registering user...");
     console.log(req.body);
@@ -14,6 +16,12 @@ module.exports.subscribe = async (req, res)=>{
         console.log("User created successfully!");
         res.status(201).json({status : 201, content : "User created successfully." } );
 
+        //send welcome email
+        sendMail(
+            email,
+            "Welcome to CBYM!",//title 
+            "INSERT WELCOME TEXT HERE"// text
+        );
     } catch (error) {
         console.log('Error insertng user : ' + error);
         res.status(401).json({status : 401, error});
