@@ -55,7 +55,7 @@ module.exports.postHandler = async (req, res)=>{
         res.status(201).json({status : 201, content : "feed added successfully" } );
         
         //send newsfeed email
-        sendFeeds(knex);
+        sendFeeds(knex, title, content, author );
         
     } catch (error) {
         console.log('Error fetching data : ' + error);
@@ -63,7 +63,7 @@ module.exports.postHandler = async (req, res)=>{
     }
                         
 }
-async function sendFeeds(knex) {
+async function sendFeeds(knex, title, content, author ) {
     try {
         let result = await knex.select(['email', 'firstname']).from('subscribers');// limit
         for (const i in result) {
@@ -72,7 +72,7 @@ async function sendFeeds(knex) {
                 sendMail(
                     user.email,
                     "Your daily CBYM News feed!",//title 
-                    "INSERT NEWSFEED TEXT HERE"// text
+                    `${title} \n\t${content} \n\n${author}`// text
                 );
             }
         }

@@ -22,7 +22,7 @@ async function sendMail(email, subject, text){
 
     try {
         let info = await mailTransport.sendMail({
-                        from : ' "CBYM" <dezwhy97@gmail.com>',
+                        from : ` "CBYM" <${credentials.user}>`,
                         to : email,
                         subject,
                         text,

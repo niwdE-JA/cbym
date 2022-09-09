@@ -20,7 +20,7 @@ module.exports.subscribe = async (req, res)=>{
         sendMail(
             email,
             "Welcome to CBYM!",//title 
-            "INSERT WELCOME TEXT HERE"// text
+            `Hello ${firstname},\n\tWe are elated that you are joining this platform. We hope to hear from you as you hear from us.\nThank you for subscribing to our news letter.\n\nO.Adeboye`//text
         );
     } catch (error) {
         console.log('Error insertng user : ' + error);

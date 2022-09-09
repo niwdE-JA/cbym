@@ -20,7 +20,7 @@ const KNEX_CONFIG =
     }
 };
 
-const ADMIN_KEY = process.env.ADMIN_KEY || 'development_key';
+const ADMIN_KEY = process.env.ADMIN_KEY || 'admin';
 
 module.exports = {
     SESSION_KEY,

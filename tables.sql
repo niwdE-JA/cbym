@@ -10,7 +10,6 @@ title VARCHAR NOT NULL,
 author VARCHAR NOT NULL,
 content TEXT NOT NULL,
 date BIGINT NOT NULL
--- TIME
 );
 
 CREATE TABLE sessions (
